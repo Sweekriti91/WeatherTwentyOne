@@ -42,8 +42,8 @@ jobs:
       - name: Install and Run maui-check Tool
         shell: pwsh
         run: |
-          & dotnet tool update --global redth.net.maui.check --version "${MAUICHECKVERSION}" --add-source https://api.nuget.org/v3/index.json
-          & maui-check --ci --non-interactive --fix --skip androidsdk --skip xcode --skip vswin --skip vsmac --manifest "${MAUICHECKMANIFEST}"
+          & dotnet tool update --global redth.net.maui.check --version ${MAUICHECKVERSION} --add-source https://api.nuget.org/v3/index.json
+          & maui-check --ci --non-interactive --fix --skip androidsdk --skip xcode --skip vswin --skip vsmac --manifest ${MAUICHECKMANIFEST}
 
       - name: Build Weather21
         shell: pwsh

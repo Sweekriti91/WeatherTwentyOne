@@ -36,7 +36,7 @@ jobs:
         run: |
           $ProgressPreference = 'SilentlyContinue'
           Invoke-WebRequest -Uri "https://dot.net/v1/dotnet-install.ps1" -OutFile dotnet-install.ps1
-          & .\dotnet-install.ps1 -Version "${{env.DOTNETVERSION}}" -InstallDir "$env:ProgramFiles\dotnet\" -Verbose
+          & .\dotnet-install.ps1 -Version ${{env.DOTNETVERSION}} -InstallDir "$env:ProgramFiles\dotnet\" -Verbose
           & dotnet --list-sdks
           
       - name: Install and Run maui-check Tool
@@ -45,11 +45,11 @@ jobs:
           & dotnet tool update --global redth.net.maui.check --version ${{env.MAUICHECKVERSION}} --add-source https://api.nuget.org/v3/index.json
           & maui-check --ci --non-interactive --fix --skip androidsdk --skip xcode --skip vswin --skip vsmac --manifest ${{env.MAUICHECKMANIFEST}}
 
-      - name: Build Weather21
-        shell: pwsh
-        run: |
-          & dotnet build src\WeatherTwentyOne.sln -c Debug   -bl:$GITHUB_WORKSPACE\artifacts\Debug.binlog
-          & dotnet build src\WeatherTwentyOne.sln -c Release -bl:$GITHUB_WORKSPACE\artifacts\Release.binlog
+      # - name: Build Weather21
+      #   shell: pwsh
+      #   run: |
+      #     & dotnet build src\WeatherTwentyOne.sln -c Debug   -bl:$GITHUB_WORKSPACE\artifacts\Debug.binlog
+      #     & dotnet build src\WeatherTwentyOne.sln -c Release -bl:$GITHUB_WORKSPACE\artifacts\Release.binlog
 
       - name: Build WinUI3 Debug
         run: msbuild src\WeatherTwentyOne.sln -restore -p:Configuration=Debug -bl:$GITHUB_WORKSPACE\artifacts\WinUI3-Debug.binlog

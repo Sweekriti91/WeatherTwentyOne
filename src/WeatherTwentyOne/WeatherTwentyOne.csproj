@@ -30,8 +30,7 @@
     <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">false</UseInterpreter>
   </PropertyGroup>
 
-   <PropertyGroup>
-        <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
         <TargetFramework>net6.0-ios</TargetFramework>
         <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
         <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">false</UseInterpreter>

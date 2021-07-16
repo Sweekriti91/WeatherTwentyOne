@@ -10,7 +10,7 @@ on:
 
 env:
     ISRUNNINGONCI: true
-    DOTNETVERSION:  6.0.100-preview.5.21302.13
+    DOTNETVERSION:  6.0.100-preview.6.21355.2
     MAUICHECKVERSION: 0.5.6
     MAUICHECKMANIFEST: https://raw.githubusercontent.com/Redth/dotnet-maui-check/main/manifests/maui-preview.manifest.json
     DOTNETROOT: /usr/local/share/dotnet/
@@ -28,8 +28,16 @@ jobs:
         shell: pwsh
         run: mkdir $GITHUB_WORKSPACE\artifacts
 
+      # open PR should remove need for the script SOON! https://github.com/microsoft/setup-msbuild/pull/56
+      - name: Install Visual Studio Preview
+        shell: pwsh
+        run: powershell .\build\install-vs.ps1
+
       - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.2
+        shell: pwsh
+        run: |
+          dotnet tool update -g dotnet-vs
+          & echo "$(vs where preview --prop=InstallationPath)\MSBuild\Current\Bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name:  install .NET 6 preview
         shell: pwsh
@@ -43,13 +51,16 @@ jobs:
         shell: pwsh
         run: |
           & dotnet tool update --global redth.net.maui.check --version ${{env.MAUICHECKVERSION}} --add-source https://api.nuget.org/v3/index.json
-          & maui-check --ci --non-interactive --fix --skip androidsdk --skip xcode --skip vswin --skip vsmac --manifest ${{env.MAUICHECKMANIFEST}}
+          & maui-check --ci --non-interactive --fix --skip androidsdk --skip xcode --skip vswin --skip vsmac --skip edgewebview2
 
-      # - name: Build Weather21
-      #   shell: pwsh
-      #   run: |
-      #     & dotnet build src\WeatherTwentyOne.sln -c Debug   -bl:$GITHUB_WORKSPACE\artifacts\Debug.binlog
-      #     & dotnet build src\WeatherTwentyOne.sln -c Release -bl:$GITHUB_WORKSPACE\artifacts\Release.binlog
+      - name: Restore nuget packages
+        run: nuget restore src\WeatherTwentyOne.sln
+
+      - name: Build Weather21
+        shell: pwsh
+        run: |
+          & dotnet build src\WeatherTwentyOne.sln -c Debug   -bl:$GITHUB_WORKSPACE\artifacts\Debug.binlog
+          & dotnet build src\WeatherTwentyOne.sln -c Release -bl:$GITHUB_WORKSPACE\artifacts\Release.binlog
 
       - name: Build WinUI3 Debug
         run: msbuild src\WeatherTwentyOne.sln -restore -p:Configuration=Debug -bl:$GITHUB_WORKSPACE\artifacts\WinUI3-Debug.binlog

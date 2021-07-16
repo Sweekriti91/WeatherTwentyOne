@@ -54,7 +54,7 @@ jobs:
 
       - name: Build Weather21
         shell: pwsh
-        run: dotnet build src/WeatherTwentyOne -f net6.0-android -c Debug
+        run: dotnet build src/WeatherTwentyOne/WeatherTwentyOne.csproj -p:Configuration=Debug -p:TargetFramework=net6.0-android
 
       - name: Build WinUI3 Debug
         run: msbuild src\WeatherTwentyOne.sln -restore -p:Configuration=Debug -bl:$GITHUB_WORKSPACE\artifacts\WinUI3-Debug.binlog

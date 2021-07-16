@@ -5,6 +5,7 @@ on:
     branches: [ main, dev/add-ci ]
     paths:
       - '.github/workflows/dev-mac.yml' 
+      - 'src/**'
 
   pull_request:
     branches: [ main ]

@@ -50,11 +50,11 @@ jobs:
       - name: Install and Run maui-check Tool
         shell: pwsh
         run: |
-          & dotnet tool update --global redth.net.maui.check --version ${{env.MAUICHECKVERSION}} --add-source https://api.nuget.org/v3/index.json
+          & dotnet tool update --global redth.net.maui.check
           & maui-check --ci --non-interactive --fix --skip androidsdk --skip xcode --skip vswin --skip vsmac --skip edgewebview2
 
       - name: Restore nuget packages
-        run: nuget restore src\WeatherTwentyOne.sln
+        run: dotnet restore src\WeatherTwentyOne.sln
 
       - name: Build Weather21
         shell: pwsh

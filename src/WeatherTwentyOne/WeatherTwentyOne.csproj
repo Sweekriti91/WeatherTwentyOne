@@ -25,15 +25,13 @@
 
   <PropertyGroup>
     <!-- <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier> -->
-    <RuntimeIdentifier Condition="$(TargetFramework.Contains('-android'))">android-arm64</RuntimeIdentifier>
     <RuntimeIdentifier Condition="$(TargetFramework.Contains('-maccatalyst'))">maccatalyst-x64</RuntimeIdentifier>
     <InvariantGlobalization Condition="$(TargetFramework.Contains('-maccatalyst'))">true</InvariantGlobalization>
     <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">false</UseInterpreter>
   </PropertyGroup>
 
    <PropertyGroup>
-        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-        <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+        <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
         <TargetFramework>net6.0-ios</TargetFramework>
         <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
         <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">false</UseInterpreter>

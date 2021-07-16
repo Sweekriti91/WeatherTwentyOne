@@ -51,7 +51,7 @@ jobs:
         shell: bash
         run: |
           dotnet build src/WeatherTwentyOne -f net6.0-android &&
-          dotnet build src/WeatherTwentyOne -f net6.0-ios &&
+          dotnet build src/WeatherTwentyOne/WeatherTwentyOne.csproj -p:Configuration=Debug -p:TargetFramework=net6.0-ios -p:Platform=iPhoneSimulator &&
           dotnet build src/WeatherTwentyOne -f net6.0-maccatalyst
 
 

@@ -20,10 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Create Artifacts Folder
-        shell: pwsh
-        run: mkdir $GITHUB_WORKSPACE\artifacts
-
       # open PR should remove need for the script SOON! https://github.com/microsoft/setup-msbuild/pull/56
       - name: Install Visual Studio Preview
         shell: pwsh
@@ -54,17 +50,16 @@ jobs:
 
       - name: Build Weather21
         shell: pwsh
-        run: dotnet build src/WeatherTwentyOne/WeatherTwentyOne.csproj -p:Configuration=Debug -p:TargetFramework=net6.0-android
+        run: dotnet build src/WeatherTwentyOne -f net6.0-android -c Debug
 
       - name: Build WinUI3 Debug
-        run: msbuild src\WeatherTwentyOne.sln -restore -p:Configuration=Debug -bl:$GITHUB_WORKSPACE\artifacts\WinUI3-Debug.binlog
+        run: msbuild src\WeatherTwentyOne.sln -restore -p:Configuration=Debug
 
       - name: Build WinUI3 Release
-        run: msbuild src\WeatherTwentyOne.sln -p:Configuration=Release -bl:$GITHUB_WORKSPACE\artifacts\WinUI3-Release.binlog
-        
+        run: msbuild src\WeatherTwentyOne.sln -p:Configuration=Release
+
       - uses: actions/upload-artifact@v2
         with:
           name: artifacts-windows
           path: |
-            $GITHUB_WORKSPACE\artifacts\
             src\WeatherTwentyOne\bin\Debug\**\*-Signed.apk

@@ -33,7 +33,7 @@
    <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-        <TargetFramework>;net6.0-ios</TargetFramework>
+        <TargetFramework>net6.0-ios</TargetFramework>
         <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
         <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">false</UseInterpreter>
         <InvariantGlobalization Condition="$(TargetFramework.Contains('-maccatalyst'))">false</InvariantGlobalization>

@@ -1,4 +1,4 @@
-name: Build MAUI
+name: Build MAUI-Mac
 
 on:
   push:

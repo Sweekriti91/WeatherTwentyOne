@@ -3,6 +3,8 @@ name: Build MAUI-Windows
 on:
   push:
     branches: [ main, dev/add-ci ]
+    paths:
+      - '.github/workflows/dev.yml' 
   pull_request:
     branches: [ main ]
 

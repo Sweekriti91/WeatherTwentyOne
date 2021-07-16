@@ -50,9 +50,9 @@ jobs:
       - name: Build Weather21
         shell: bash
         run: |
-          dotnet build src/WeatherTwentyOne -f net6.0-android
-          dotnet build src/WeatherTwentyOne -f net6.0-ios
-          dotnet build src/WeatherTwentyOne -f net6.0-maccatalyst
+          dotnet build src/WeatherTwentyOne -f net6.0-android -c Debug
+          dotnet build src/WeatherTwentyOne -f net6.0-ios -c Debug
+          dotnet build src/WeatherTwentyOne -f net6.0-maccatalyst -c Debug
 
       # - name: Build WinUI3 Debug
       #   run: msbuild src\WeatherTwentyOne.sln -restore -p:Configuration=Debug -bl:$GITHUB_WORKSPACE\artifacts\WinUI3-Debug.binlog

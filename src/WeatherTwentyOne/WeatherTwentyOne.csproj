@@ -32,6 +32,10 @@
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
         <TargetFramework>net6.0-ios</TargetFramework>
+        <MtouchArch>x86_64</MtouchArch>
+        <MtouchLink>None</MtouchLink>
+        <MtouchDebug>true</MtouchDebug>
+        <MtouchExtraArgs>-v -v -v -v</MtouchExtraArgs>
         <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
         <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">false</UseInterpreter>
         <InvariantGlobalization Condition="$(TargetFramework.Contains('-maccatalyst'))">false</InvariantGlobalization>

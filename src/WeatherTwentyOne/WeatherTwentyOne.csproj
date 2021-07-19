@@ -24,22 +24,25 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <!-- <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier> -->
+    <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
     <RuntimeIdentifier Condition="$(TargetFramework.Contains('-maccatalyst'))">maccatalyst-x64</RuntimeIdentifier>
     <InvariantGlobalization Condition="$(TargetFramework.Contains('-maccatalyst'))">true</InvariantGlobalization>
     <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">false</UseInterpreter>
   </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-        <TargetFramework>net6.0-ios</TargetFramework>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+        <DefineConstants>DEBUG</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
         <MtouchArch>x86_64</MtouchArch>
         <MtouchLink>None</MtouchLink>
         <MtouchDebug>true</MtouchDebug>
         <MtouchExtraArgs>-v -v -v -v</MtouchExtraArgs>
-        <RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
-        <UseInterpreter Condition="$(TargetFramework.Contains('-android'))">false</UseInterpreter>
-        <InvariantGlobalization Condition="$(TargetFramework.Contains('-maccatalyst'))">false</InvariantGlobalization>
-        <UseMaui>true</UseMaui>
+        <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     </PropertyGroup>
 
 </Project>

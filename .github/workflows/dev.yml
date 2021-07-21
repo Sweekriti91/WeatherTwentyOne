@@ -2,7 +2,7 @@ name: Build MAUI-Windows
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev/add-ci ]
 
   pull_request:
     branches: [ main ]
